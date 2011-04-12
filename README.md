@@ -10,7 +10,7 @@ by hand. This is the only way to do it because `.htc`'s can only be executed aft
 the document has loaded. It's not as elegant, no, but you don't have to muddy up 
 your markup. It's a little hacksy, but this is all it requires:
 
-  html { behavior: url(shim.htc); }
+    html { behavior: url(shim.htc); }
 
 Obviously, all non-IE browsers will completely ignore that property. 
 
