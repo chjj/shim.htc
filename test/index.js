@@ -3,9 +3,12 @@ var http = require('http'),
 
 http.createServer(function(req, res) {
   var type, file;
-  if (~req.url.indexOf('shim')) {
+  if (~req.url.indexOf('shim.htc')) {
     type = 'text/x-component';
     file = '../shim.htc';
+  } else if (~req.url.indexOf('shim.min.htc')) {
+    type = 'text/x-component';
+    file = '../shim.min.htc';
   } else {
     type = 'text/html';
     file = 'test.html';

@@ -3,6 +3,9 @@
 __shim.htc__ is an [HTML Component](http://en.wikipedia.org/wiki/HTML_Components) and 
 html5 "shim" to fix bugged HTML5 elements in IE. 
 
+__UPDATE:__ It is better to put the `behavior` property on the `body` element 
+as opposed to the `html` element.
+
 Technically speaking, it's not actually a shim: The traditional html5 shim works 
 by using `document.createElement` to essentially fix IE's HTML parser. This `.htc` 
 file is different in that it will go in after the fact and fix the DOM structure 
@@ -10,7 +13,9 @@ by hand. This is the only way to do it because `.htc`'s can only be executed aft
 the document has loaded. It's not as elegant, no, but you don't have to muddy up 
 your markup. It's a little hacksy, but this is all it requires:
 
-    html { behavior: url(shim.htc); }
+``` css
+body { behavior: url(shim.htc); }
+```
 
 Obviously, all non-IE browsers will completely ignore that property. 
 
@@ -21,6 +26,5 @@ only pollute your markup.
 
 ## License
 
-(c) Copyright 2011 (MIT Licensed), Christopher Jeffrey.
-
+(c) Copyright 2011 (MIT Licensed), Christopher Jeffrey.  
 See LICENSE for more info.

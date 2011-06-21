@@ -2,11 +2,12 @@
   shim.htc: an html5 shim (github.com/chjj) 
   (c) Copyright 2011, Christopher Jeffrey (MIT Licensed) 
 -->
-<PUBLIC:COMPONENT lightWeight="true">
-  <PUBLIC:ATTACH EVENT="ondocumentready" FOR="element" ONEVENT="shim()"/>
-</PUBLIC:COMPONENT>
+<public:component lightweight="true">
+  <public:attach event="ondocumentready" 
+    for="element" onevent="shim()"/>
+</public:component>
 
-<SCRIPT LANGUAGE="JScript">
+<script language="JScript">
   var shim = function() {
     if (function() { 
       var el = element.document.createElement('b');
@@ -17,11 +18,11 @@
     var doc = element.document, 
         head = doc.getElementsByTagName('head')[0], 
         body = doc.body, 
-        names = new RegExp([
-          '^(abbr|article|aside|audio|canvas|details|figcaption|',
-          'figure|footer|header|hgroup|mark|meter|nav|output|',
-          'progress|section|summary|time|video)$'
-        ].join(''), 'i');
+        names = new RegExp(
+          '^(abbr|article|aside|audio|canvas|details|figcaption'
+          + '|figure|footer|header|hgroup|mark|meter|nav|output'
+          + '|progress|section|summary|time|video)$', 
+        'i');
     
     // move any html5 elements out of the head:
     // if the BODY/HEAD tags are omitted with html5 elements present, 
@@ -33,8 +34,12 @@
     }
     
     // mutable variables used during the walk
+    // this is an absurd amount of variables,
+    // but i dont like having vars in loops,
+    // it also improves performance
     var all = body.getElementsByTagName('*'), 
-        i = 0, cur, el, attr, val, depth;
+        i = 0, cur, el, attr, val, depth, 
+        start, close, next;
     
     // walk the dom tree and fix the structure accordingly
     while (cur = all[i++]) {
@@ -51,14 +56,14 @@
         
         // append all elements until the corresponding 
         // bugged "close-tag" element is found
-        depth = 0;
-        while (el.nextSibling) {
-          if (el.nextSibling.nodeName === el.nodeName) {
+        start = el.nodeName, close = '/' + start, depth = 0;
+        while (next = el.nextSibling) {
+          if (next.nodeName === start) {
             depth++;
-          } else if (el.nextSibling.nodeName === '/' + el.nodeName) {
-            if (--depth < 0) break;
+          } else if (next.nodeName === close) {
+            if (!depth--) break;
           }
-          el.appendChild(el.nextSibling);
+          el.appendChild(next);
         }
         
         // get rid of the bugged "close-tag" element
@@ -69,4 +74,4 @@
       }
     }
   };
-</SCRIPT>
+</script>
