@@ -1,5 +1,5 @@
-var http = require('http'),
-    fs = require('fs');
+var http = require('http')
+  , fs = require('fs');
 
 http.createServer(function(req, res) {
   var type, file;

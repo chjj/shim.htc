@@ -1,5 +1,0 @@
-<!-- 
-  shim.htc: an html5 shim (github.com/chjj) 
-  (c) Copyright 2011, Christopher Jeffrey (MIT Licensed) 
--->
-<script>(function(){if(!function(){var a=element.document.createElement("b");a.innerHTML="<nav></nav>";return a.childNodes.length>0}()){var a=element.document,b=a.getElementsByTagName("head")[0],c=a.body,d=new RegExp("^(abbr|article|aside|audio|canvas|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video)$","i");while(d.test(b.lastChild.nodeName))c.insertBefore(b.lastChild,c.firstChild);var e=c.getElementsByTagName("*"),f=0,g,h,i,j,k,l,m,n;while(g=e[f++])if(d.test(g.nodeName)&&!g.firstChild){h=a.createElement(g.nodeName);for(i in g.attributes)(j=g.getAttribute(i))&&h.setAttribute(i,j);g.parentNode.replaceChild(h,g),l=h.nodeName,m="/"+l,k=0;while(n=h.nextSibling){if(n.nodeName===l)k++;else if(n.nodeName===m&&!(k--))break;h.appendChild(n)}h.nextSibling&&h.parentNode.removeChild(h.nextSibling)}}})()</script>
