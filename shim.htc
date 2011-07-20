@@ -1,6 +1,6 @@
 <!-- 
   shim.htc: an html5 shim (github.com/chjj) 
-  (c) Copyright 2011, Christopher Jeffrey (MIT Licensed) 
+  Copyright (c) 2011, Christopher Jeffrey (MIT Licensed) 
 -->
 <public:component lightweight="true">
   <public:attach event="ondocumentready" 
@@ -19,7 +19,7 @@
       , head = doc.getElementsByTagName('head')[0]
       , body = doc.body
       , names = new RegExp(
-          '^(abbr|article|aside|audio|canvas|details|figcaption'
+          '^(article|aside|audio|canvas|details|figcaption'
           + '|figure|footer|header|hgroup|mark|meter|nav|output'
           + '|progress|section|summary|time|video)$', 
         'i');
@@ -37,25 +37,16 @@
     // fix the structure accordingly
     while (el = all[i++]) {
       if (!names.test(el.nodeName) 
-          || !!el.firstChild) continue;
+          || el.firstChild) continue;
 
       // turn all the bugged "start-tag" 
       // elements into their real counterparts
-      /*var sub = doc.createElement(el.nodeName)
-        , attr
-        , val;
-
-      for (attr in el.attributes) {
-        val = el.getAttribute(attr);
-        if (val) sub.setAttribute(attr, val);
-      }*/
-
       var sub = doc.createElement(el.nodeName) 
         , at = el.attributes
         , l = at.length;
 
       while (l--) if (at[l].nodeValue) { 
-        sub.setAttribute(at[l].name, at[l].nodeValue);
+        sub.setAttribute(at[l].name, at[l].value);
       }
 
       el.parentNode.replaceChild(sub, el);
@@ -77,7 +68,7 @@
       }
 
       // get rid of the bugged "close-tag" element
-      if (sub.nextSibling) sub.parentNode.removeChild(sub.nextSibling); 
+      sub.parentNode.removeChild(sub.nextSibling); 
     }
   };
 </script>
